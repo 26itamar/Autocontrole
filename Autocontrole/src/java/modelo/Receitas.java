@@ -13,6 +13,15 @@ public class Receitas {
     private int idReceitas;
     private String descricao;
     private float valor;
+    private ReceitaDespesa rd;
+
+    public ReceitaDespesa getRd() {
+        return rd;
+    }
+
+    public void setRd(ReceitaDespesa rd) {
+        this.rd = rd;
+    }
 
     public int getIdReceitas() {
         return idReceitas;
