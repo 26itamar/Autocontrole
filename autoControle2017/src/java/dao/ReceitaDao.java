@@ -18,5 +18,7 @@ public interface ReceitaDao {
     public void remover(Receita r);
     public List<Receita> getListAll();
     public Receita findById(int id);
+    
+    public List<Receita> getListData(int id);
    
 }

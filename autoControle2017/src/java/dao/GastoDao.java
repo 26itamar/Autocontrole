@@ -20,4 +20,6 @@ public interface GastoDao {
     public List<Gasto> getListAll();
     public Gasto findById(int id);
     
+    public List<Gasto> getListData(int id);
+    
 }

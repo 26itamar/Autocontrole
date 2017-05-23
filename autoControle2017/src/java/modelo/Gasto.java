@@ -14,6 +14,10 @@ public class Gasto {
     private String descricaoGasto;
     private double valorgasto;
     private Data data;
+    
+    public Gasto() {
+        data = new Data();
+    }
 
     public int getId() {
         return id;

@@ -30,7 +30,7 @@ public class GastoImpl implements GastoDao {
 
     @Override
     public void salvar(Gasto g) {
-       String sql = "INSERT INTO Gastos (descricao_gato, valor_gasto, id_data_g) VALUES(?,?,?)";
+       String sql = "INSERT INTO gastos (descricao_gasto, valor_gasto, id_data_g) VALUES(?,?,?)";
         try {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, g.getDescricaoGasto());
@@ -52,7 +52,17 @@ public class GastoImpl implements GastoDao {
 
     @Override
     public void remover(Gasto g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+               // TODO Auto-generated method stub
+        String sql = "delete from gastos where id = ?";
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, g.getId());
+
+            stmt.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -72,7 +82,7 @@ public class GastoImpl implements GastoDao {
                 g.setValorgasto(rs.getDouble(3));  
                 //g.getData().setId(rs.getInt(4));     
                 
-                //cria um objeto cidade
+                //cria um objeto data
                 Data mes = new DataImpl().findById((rs.getInt(4)));
                
                 g.setData(mes);
@@ -89,12 +99,79 @@ public class GastoImpl implements GastoDao {
             ex.printStackTrace();
         }
         return listGasto;
-    
+        
     }
 
     @Override
     public Gasto findById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        String sql = "select id, descricao_gasto, valor_gasto, id_data_g "
+                + "from gastos where id = ?";
+        Gasto gasto =new Gasto();
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            rs.next();
+            
+            gasto.setId(rs.getInt(1));
+            gasto.setDescricaoGasto(rs.getString(2));
+            gasto.setValorgasto(rs.getDouble(3));
+            
+            //cria um objeto data
+                Data mes = new DataImpl().findById((rs.getInt(4)));
+               
+                gasto.setData(mes);
+                 
+                Data ano = new DataImpl().findById((rs.getInt(4)));
+                
+                gasto.setData(ano);
+                
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return gasto;
     }
+    
+ public List<Gasto> getListData(int id_data_g) {
+     
+    List<Gasto> listGastoData = new ArrayList<>();
+    
+        String sql = "Select id, descricao_gasto, valor_gasto, id_data_g "
+                + "from gastos where id_data_g = ?";
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id_data_g);
+            rs = stmt.executeQuery();
+              
+           
+            while(rs.next()){
+                Gasto g = new Gasto();
+                g.setId(rs.getInt(1));
+                g.setDescricaoGasto(rs.getString(2));
+                g.setValorgasto(rs.getDouble(3));      
+                
+                //cria um objeto data
+                Data mes = new DataImpl().findById((rs.getInt(4)));
+               
+                g.setData(mes);
+                 
+                Data ano = new DataImpl().findById((rs.getInt(4)));
+                
+                g.setData(ano);
+                
+             
+                listGastoData.add(g);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GastoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        return listGastoData;
+        
+    }
+    
+    
     
 }

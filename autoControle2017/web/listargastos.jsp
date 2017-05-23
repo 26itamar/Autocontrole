@@ -18,7 +18,7 @@
     </head>
     <body>
         <%@include file="index.html" %>
-        <h1>Receitas/Gastos</h1>
+        <h1>Gastos</h1>
         <div>
             <table>
                 <tr>
@@ -41,13 +41,28 @@
                             <td><%= g.getData().getMes() %></td>
                             <td><%= g.getData().getAno() %></td>
                             
-                            <td><a href="index.html?id=<%= g.getId()%>">editar</a></td>
+                            <td><a href="listargastos.jsp?id=<%= g.getId()%>">Excluir</a></td>
                         </tr>
                         <%
                     }
                 %>
             </table>
-            <a href="index.html">Inicio</a>
+           <%
+                    int id = 0;
+                    Gasto gasto = new Gasto();
+                    if (request.getParameter("id") != null) {
+                       id = Integer.valueOf(request.getParameter("id"));
+                       
+                       Gasto g= new Gasto();               
+                       g.setId(id);
+                       gastoImpl.remover(g);       
+                       
+                       response.sendRedirect("listargastos.jsp");
+                       
+                    }
+                %>
+            <br>         
+             <button><a href="index.html">Inicio</a></button>
         </div>
     </body>
 </html>

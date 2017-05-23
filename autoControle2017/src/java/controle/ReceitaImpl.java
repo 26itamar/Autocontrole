@@ -76,17 +76,96 @@ public class ReceitaImpl implements ReceitaDao{
 
     @Override
     public void remover(Receita r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+       // TODO Auto-generated method stub
+        String sql = "delete from receitas where id = ?";
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, r.getId());
+
+            stmt.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public List<Receita> getListAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+       List<Receita> listGasto = new ArrayList<>();
+    
+        String sql = "Select id, descricao_receita, valor_receita, id_data_r from receitas order by id";
+        try {
+            stmt = conn.prepareStatement(sql);
+            rs  = stmt.executeQuery();
+            
+            while(rs.next()){
+                Receita r = new Receita();
+                r.setId(rs.getInt(1));
+                r.setDescricaoReceita(rs.getString(2));
+                r.setValorReceita(rs.getDouble(3));  
+                       
+                //cria um objeto data
+                Data mes = new DataImpl().findById((rs.getInt(4)));
+               
+                r.setData(mes);
+                 
+                Data ano = new DataImpl().findById((rs.getInt(4)));
+                
+                r.setData(ano);
+                
+                listGasto.add(r);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GastoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        return listGasto;
+    
     }
 
     @Override
     public Receita findById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+     public List<Receita> getListData(int id_data_r) {
+     
+    List<Receita> listReceitaData = new ArrayList<>();
+    
+        String sql = "Select id, descricao_receita, valor_receita, id_data_r "
+                + "from receitas where id_data_r = ?";
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id_data_r);
+            rs = stmt.executeQuery();
+               
+            while(rs.next()){
+                Receita r = new Receita();
+                r.setId(rs.getInt(1));
+                r.setDescricaoReceita(rs.getString(2));
+                r.setValorReceita(rs.getDouble(3));
+   
+                //cria um objeto data
+                Data mes = new DataImpl().findById((rs.getInt(4)));
+               
+                r.setData(mes);
+                 
+                Data ano = new DataImpl().findById((rs.getInt(4)));
+                
+                r.setData(ano);
+                        
+                listReceitaData.add(r);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GastoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        return listReceitaData;
+        
+    }
+    
     
 }
