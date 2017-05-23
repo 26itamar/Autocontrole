@@ -20,8 +20,8 @@
         <h1>Cadastro de Receitas</h1>
         <div>
             <form action="cadastrarReceitas" method="post">
-                Descrição Receita:<input type="text" name="descricao" /><br>
-                Valor:<input type="text" name="valor"/><br>
+                Descrição Receita:<input type="text" name="descricao" />
+                Valor R$:<input type="text" name="valor"/>
                 Data:
                 <select name="data_r">
                     <option value="">Escolha</option>
@@ -35,7 +35,7 @@
                 </select>
                 
                 <input type="submit" value="Salvar Receita"/>
-                <a href="index.html">Cancelar</a>
+                <button><a href="index.html">Cancelar</a></button>
             </form>
         </div>
     </body>

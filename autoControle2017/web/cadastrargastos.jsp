@@ -20,8 +20,8 @@
         <h1>Cadastro de Gastos</h1>
         <div>
             <form action="cadastrarGastos" method="post">
-                Descrição do Gasto:<input type="text" name="descricao" /><br>
-                Valor:<input type="text" name="valor"/><br>
+                Descrição do Gasto:<input type="text" name="descricao" />
+                Valor R$:<input type="text" name="valor"/>
                 Data:
                 <select name="data_g">
                     <option value="">Escolha</option>
@@ -33,9 +33,10 @@
                 }    
                 %>
                 </select>
-                
+               
                 <input type="submit" value="Salvar Gasto"/>
-                <a href="index.html">Cancelar</a>
+               
+                <button><a href="index.html">Cancelar</a></button>
             </form>
         </div>
     </body>

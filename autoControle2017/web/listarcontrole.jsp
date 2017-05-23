@@ -33,7 +33,7 @@
                 </select>
                 
                 <input type="submit" value="Verificar Gastos"/>
-                <a href="index.html">Cancelar</a>
+                <button><a href="index.html">Cancelar</a></button>
             </form>
         </div>
     </body>
