@@ -1,4 +1,4 @@
-<%-- 
+;<%-- 
     Document   : testes
     Created on : 22/05/2017, 10:29:48
     Author     : Sony Vaio
@@ -16,7 +16,7 @@
         <title>Cadastro de Receita</Rtitle>
     </head>
     <body>
-        <%@include file="index.html" %>
+       <%@include file="index.html" %>
         <h1>Selecione A Data</h1>
         <div>
             <form action="listarautocontrole.jsp" method="post">

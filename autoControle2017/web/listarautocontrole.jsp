@@ -18,6 +18,9 @@
     </head>
     <body>
         
+         <%@include file="index.html" %>
+        
+        
         <%
             int id_data = Integer.valueOf(request.getParameter("data"));
          %>
